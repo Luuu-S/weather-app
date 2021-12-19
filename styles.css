@@ -19,6 +19,12 @@ input[type="text"] {
 a {
   color: #787a91;
 }
+button {
+  background-color: #3e64ff;
+  padding: 8px;
+  border-radius: 10px;
+  margin-left: 7px;
+}
 .weather-now {
   text-align: center;
   border-style: solid;
@@ -67,10 +73,7 @@ a {
   top: -34px;
   font-size: 15px;
 }
-
-button {
-  background-color: #3e64ff;
-  padding: 8px;
-  border-radius: 10px;
-  margin-left: 7px;
+.bottom-text {
+  text-align: center;
+  margin-top: 10px;
 }
