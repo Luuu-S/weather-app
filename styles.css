@@ -51,9 +51,9 @@ button {
   font-family: "Poppins", sans-serif;
   border: solid 2px gray;
   border-radius: 10px;
-}
-.container {
-  width: 50%;
+  max-width: 700px;
+  margin: 20px auto;
+  margin-bottom: 10px;
 }
 .col-2 {
   margin-right: 10px;
@@ -75,5 +75,4 @@ button {
 }
 .bottom-text {
   text-align: center;
-  margin-top: 10px;
 }
