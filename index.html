@@ -33,7 +33,7 @@
                   id="search-city"
                   placeholder="Enter your city..."
                 />
-                <button class="form-button">Submit</button><br />
+                <button>Submit</button><br />
               </form>
             </div>
             <div class="col-6 weather-now">
@@ -41,15 +41,22 @@
                 Current location
               </button>
               <h2 id="city"><br /></h2>
-              <img src="images/sunny.png" width="100px" />
-              <h3>
+              <div id="date-time"></div>
+              <img src="images/sunny.png" width="90px" id="weather-icon" />
+              <br />
+              <span class="current-weather">
                 <span id="temperature"></span
                 ><span class="units"
                   ><a href="#" id="celsius-link">°C</a>/
                   <a href="#" id="fahrenheit-link">°F</a></span
                 >
-              </h3>
-              <span id="date-time">Friday, 16:07</span>
+              </span>
+              <br />
+              <small>
+                <span id="weather-desc"></span> <br />
+                Humidity: <span id="humidity"></span>%<br />
+                Wind: <span id="wind"></span> mps
+              </small>
             </div>
             <div class="row">
               <div class="col-2">

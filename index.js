@@ -30,16 +30,14 @@ function submitForm(event) {
   search(city);
 }
 
-function changeCurrentTempPos(response) {
-  let temperature = document.querySelector("#temperature");
-  let city = document.querySelector("h2#city");
-  city.innerHTML = `${response.data.name}`;
-  temperature.innerHTML = Math.round(`${response.data.main.temp}`);
-}
-
 function changeTemperature(response) {
   let temperature = document.querySelector("#temperature");
+  let icon = document.querySelector("#weather-icon")
+  icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
   temperature.innerHTML = Math.round(`${response.data.main.temp}`)
+  document.querySelector("#humidity").innerHTML=`${response.data.main.humidity}`;
+  document.querySelector("#wind").innerHTML = `${response.data.wind.speed}`;
+  document.querySelector("#weather-desc").innerHTML = `${response.data.weather[0].description}`
   document.querySelector("h2#city").innerHTML = `${response.data.name}`;
 }
 
@@ -50,7 +48,7 @@ function currentLocationTemp(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiUrlPos = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrlPos).then(changeCurrentTempPos);
+  axios.get(apiUrlPos).then(changeTemperature);
 }
 
 function newPos(event) {
