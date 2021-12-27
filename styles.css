@@ -74,10 +74,23 @@ button.current-loc {
   height: auto;
   max-width: 100%;
 }
+span.desc {
+  display: inline-block;
+}
+span.desc:first-letter {
+  text-transform: uppercase;
+}
 .units {
   position: relative;
-  top: -20px;
-  font-size: 13px;
+  top: -25px;
+  font-size: 15px;
+}
+.not-active {
+  cursor: default;
+  text-decoration: none;
+}
+.not-active:hover {
+  color: #787a91;
 }
 .bottom-text {
   text-align: center;

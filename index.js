@@ -19,7 +19,6 @@ let days = [
 let day = days[currently.getDay()];
 
 dateText.innerHTML = `${day}, ${currentHour}:${currentMinutes}`;
-
 function search(city)
 {let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 axios.get(apiUrl).then(changeTemperature);
@@ -35,6 +34,7 @@ function changeTemperature(response) {
   let icon = document.querySelector("#weather-icon")
   icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
   temperature.innerHTML = Math.round(`${response.data.main.temp}`)
+  celsius = response.data.main.temp
   document.querySelector("#humidity").innerHTML=`${response.data.main.humidity}`;
   document.querySelector("#wind").innerHTML = `${response.data.wind.speed}`;
   document.querySelector("#weather-desc").innerHTML = `${response.data.weather[0].description}`
@@ -58,5 +58,30 @@ function newPos(event) {
 
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", newPos);
+
+function changeToFahrenheit(event) {
+event.preventDefault(); 
+let temperatureElement = document.querySelector("#temperature")
+let imperialUnit = Math.round((celsius*9) /5+32);
+celsiusTemp.classList.remove("not-active")
+fahrenheitTemp.classList.add("not-active")
+temperatureElement.innerHTML = imperialUnit
+}
+
+function changeToCelsius(event) {
+event.preventDefault();
+let temperatureElement = document.querySelector("#temperature")
+fahrenheitTemp.classList.remove("not-active")
+celsiusTemp.classList.add("not-active")
+temperatureElement.innerHTML = Math.round(celsius);
+}
+
+let celsius = null;
+
+let fahrenheitTemp = document.querySelector("#fahrenheit-link")
+fahrenheitTemp.addEventListener("click", changeToFahrenheit)
+
+let celsiusTemp = document.querySelector("#celsius-link")
+celsiusTemp.addEventListener("click", changeToCelsius)
 
 search("Oslo");
