@@ -19,6 +19,21 @@ let days = [
 let day = days[currently.getDay()];
 
 dateText.innerHTML = `${day}, ${currentHour}:${currentMinutes}`;
+
+function changeForecastDay(timestamp){
+let date = new Date(timestamp*1000)
+let day = date.getDay();
+let days =  [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+return days[day];
+}
 function search(city)
 {let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 axios.get(apiUrl).then(changeTemperature);
@@ -29,22 +44,30 @@ function submitForm(event) {
   search(city);
 }
 
-function showForecast() {
+function showForecast(response) {
   let forecast = document.querySelector("#weather-forecast-temp")
+  let dailyTemperature = response.data.daily;
+  console.log(dailyTemperature)
   let forecastHTML = `<div class="row">`;
-  let days = ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-  days.forEach(function(day) {
+  dailyTemperature.forEach(function(weekday, index) {
+    if (index < 5) {
     forecastHTML = forecastHTML +`
                 <div class="col-2">
-                  <p>
-                    <img src="images/sunny.png" width="50px" /> <br />
-                    19℃
-                    <br />${day}
+                  <p> 
+                    <img src="http://openweathermap.org/img/wn/${weekday.weather[0].icon}@2x.png" width="60px" /> <br />
+                    ${Math.round(weekday.temp.day)}°C
+                    <br />${changeForecastDay(weekday.dt)}
                   </p>
-                </div>`
+                </div>` }
 })
   forecast.innerHTML = forecastHTML;
     forecastHTML = forecastHTML + `</div>`
+    console.log(response.temp)
+}
+
+function changeForecastTemp(coords) {
+let apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`
+axios.get(apiURL).then(showForecast)
 }
 
 function changeTemperature(response) {
@@ -56,7 +79,8 @@ function changeTemperature(response) {
   document.querySelector("#humidity").innerHTML=`${response.data.main.humidity}`;
   document.querySelector("#wind").innerHTML = `${response.data.wind.speed}`;
   document.querySelector("#weather-desc").innerHTML = `${response.data.weather[0].description}`
-  document.querySelector("h2#city").innerHTML = `${response.data.name}`;
+  document.querySelector("h2#city").innerHTML = `${response.data.name}`
+  changeForecastTemp(response.data.coord);
 }
 
 let formOne = document.querySelector("#search-city-form");
