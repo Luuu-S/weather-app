@@ -29,6 +29,24 @@ function submitForm(event) {
   search(city);
 }
 
+function showForecast() {
+  let forecast = document.querySelector("#weather-forecast-temp")
+  let forecastHTML = `<div class="row">`;
+  let days = ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  days.forEach(function(day) {
+    forecastHTML = forecastHTML +`
+                <div class="col-2">
+                  <p>
+                    <img src="images/sunny.png" width="50px" /> <br />
+                    19℃
+                    <br />${day}
+                  </p>
+                </div>`
+})
+  forecast.innerHTML = forecastHTML;
+    forecastHTML = forecastHTML + `</div>`
+}
+
 function changeTemperature(response) {
   let temperature = document.querySelector("#temperature");
   let icon = document.querySelector("#weather-icon")
@@ -85,3 +103,4 @@ let celsiusTemp = document.querySelector("#celsius-link")
 celsiusTemp.addEventListener("click", changeToCelsius)
 
 search("Oslo");
+showForecast()
