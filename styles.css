@@ -58,7 +58,7 @@ button.current-loc {
   border-radius: 10px;
   max-width: 700px;
   margin: 50px auto;
-  margin-top: 10px;
+  margin-top: 30px;
   margin-bottom: 10px;
 }
 .col-2 {
@@ -83,7 +83,7 @@ span.desc:first-letter {
 .units {
   position: relative;
   top: -25px;
-  font-size: 15px;
+  font-size: 18px;
 }
 .not-active {
   cursor: default;

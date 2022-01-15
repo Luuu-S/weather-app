@@ -55,7 +55,7 @@ function showForecast(response) {
                 <div class="col-2">
                   <p> 
                     <img src="http://openweathermap.org/img/wn/${weekday.weather[0].icon}@2x.png" width="60px" /> <br />
-                    ${Math.round(weekday.temp.day)}°C
+                    ${Math.round(weekday.temp.day)}°
                     <br />${changeForecastDay(weekday.dt)}
                   </p>
                 </div>` }
@@ -100,31 +100,6 @@ function newPos(event) {
 
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", newPos);
-
-function changeToFahrenheit(event) {
-event.preventDefault(); 
-let temperatureElement = document.querySelector("#temperature")
-let imperialUnit = Math.round((celsius*9) /5+32);
-celsiusTemp.classList.remove("not-active")
-fahrenheitTemp.classList.add("not-active")
-temperatureElement.innerHTML = imperialUnit
-}
-
-function changeToCelsius(event) {
-event.preventDefault();
-let temperatureElement = document.querySelector("#temperature")
-fahrenheitTemp.classList.remove("not-active")
-celsiusTemp.classList.add("not-active")
-temperatureElement.innerHTML = Math.round(celsius);
-}
-
-let celsius = null;
-
-let fahrenheitTemp = document.querySelector("#fahrenheit-link")
-fahrenheitTemp.addEventListener("click", changeToFahrenheit)
-
-let celsiusTemp = document.querySelector("#celsius-link")
-celsiusTemp.addEventListener("click", changeToCelsius)
 
 search("Oslo");
 showForecast()
